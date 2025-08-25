@@ -1,121 +1,178 @@
-# Hono REST API with Drizzle ORM, PostgreSQL, and Bun
+# Hono API REST
 
-Production-ready starter for building a fast REST API using:
+Una API REST moderna y eficiente construida con [Hono](https://hono.dev/), un framework web ultrarrápido para JavaScript/TypeScript que funciona en cualquier runtime.
 
-- Hono (ultra-light web framework)
-- Drizzle ORM (typesafe SQL ORM)
-- PostgreSQL (via Docker)
-- Bun (runtime, dev server, and test runner)
+## 🚀 Características
 
-This README walks you through local development with Docker, database migrations with Drizzle, testing, and deployment considerations.
+- **⚡ Ultra rápido**: Construido con Hono, optimizado para rendimiento
+- **🔧 TypeScript**: Desarrollo type-safe con soporte completo de TypeScript
+- **🐳 Docker Ready**: Configuración Docker Compose incluida
+- **🗃️ Base de datos**: PostgreSQL 17.5 Alpine configurado
+- **🔄 Hot Reload**: Desarrollo con recarga automática usando Bun
+- **📦 Runtime moderno**: Ejecutado con Bun para máximo rendimiento
 
-## Tech Stack
+## 🛠️ Stack Tecnológico
 
-- Runtime: Bun
-- Web framework: Hono
-- Database: PostgreSQL (Docker)
-- ORM & Migrations: Drizzle ORM + Drizzle Kit
-- Testing: Bun test
+- **Framework**: [Hono](https://hono.dev/) v4.9.4
+- **Runtime**: [Bun](https://bun.sh/)
+- **Base de datos**: PostgreSQL 17.5 Alpine
+- **Lenguaje**: TypeScript
+- **Containerización**: Docker & Docker Compose
 
-## Quick start
+## 📋 Prerrequisitos
 
-# Hono API REST con Bun — Starter mínimo
+Antes de comenzar, asegúrate de tener instalado:
 
-API REST ultraligera construida con Hono y ejecutada con Bun. Hot reload listo y un endpoint de ejemplo.
+- [Bun](https://bun.sh/) (v1.0 o superior)
+- [Docker](https://www.docker.com/) y Docker Compose
+- [Git](https://git-scm.com/)
 
-## 🚀 Quick start
+## 🚀 Instalación y Configuración
 
-1. Instalar dependencias
+### 1. Clonar el repositorio
 
-```sh
+```bash
+git clone https://github.com/Lostovayne/Hono-Api-Rest.git
+cd Hono-Api-Rest
+```
+
+### 2. Instalar dependencias
+
+```bash
 bun install
 ```
 
-2. Levantar el servidor en modo desarrollo
+### 3. Configurar la base de datos
 
-```sh
+Inicia la base de datos PostgreSQL usando Docker Compose:
+
+```bash
+docker-compose up -d
+```
+
+Esto creará un contenedor PostgreSQL con la siguiente configuración:
+
+- **Host**: localhost
+- **Puerto**: 5432
+- **Base de datos**: todos
+- **Usuario**: user
+- **Contraseña**: password
+
+### 4. Ejecutar la aplicación
+
+Para desarrollo con hot reload:
+
+```bash
 bun run dev
 ```
 
-3. Probar el endpoint
+La API estará disponible en `http://localhost:3000`
 
-```sh
+## 🔧 Scripts Disponibles
+
+| Script        | Descripción                                          |
+| ------------- | ---------------------------------------------------- |
+| `bun run dev` | Inicia el servidor en modo desarrollo con hot reload |
+
+## 📡 API Endpoints
+
+### Endpoints Base
+
+| Método | Endpoint | Descripción               |
+| ------ | -------- | ------------------------- |
+| `GET`  | `/`      | Endpoint de saludo básico |
+
+### Ejemplo de respuesta
+
+```bash
 curl http://localhost:3000/
+# Respuesta: Hello Hono!
 ```
 
-Deberías ver: `Hello Hono!`
+## 🐳 Docker
 
-## 🧩 Stack
+### Ejecutar con Docker Compose
 
-- Runtime: Bun
-- Framework: Hono
+```bash
+# Iniciar todos los servicios
+docker-compose up -d
 
-## 🗂️ Estructura del proyecto
+# Ver logs
+docker-compose logs -f
 
-```
-.
-├─ src/
-│  └─ index.ts           # App Hono exportada por defecto
-├─ package.json          # Scripts (dev)
-├─ tsconfig.json         # Config TS mínima
-└─ bun.lock
+# Detener servicios
+docker-compose down
 ```
 
-## 🧭 Arquitectura (minimal)
+### Configuración de PostgreSQL
 
-```mermaid
-flowchart LR
-  Client[Cliente] -->|HTTP GET /| App[Bun + Hono (src/index.ts)]
-  App -->|200 text/plain: "Hello Hono!"| Client
+La base de datos PostgreSQL se configura automáticamente con:
+
+```yaml
+services:
+  postgres:
+    image: postgres:17.5-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: todos
 ```
 
-## 🔌 Endpoints
+## 🏗️ Estructura del Proyecto
 
-- GET `/` → 200 OK, texto plano: `Hello Hono!`
-
-Ejemplo:
-
-```sh
-curl -i http://localhost:3000/
+```
+hono-drizzle/
+├── src/
+│   └── index.ts          # Punto de entrada de la aplicación
+├── docker-compose.yml    # Configuración de Docker Compose
+├── package.json          # Dependencias y scripts
+├── tsconfig.json         # Configuración de TypeScript
+├── bun.lock             # Lock file de Bun
+└── README.md            # Documentación del proyecto
 ```
 
-## 📜 Scripts disponibles
+## 🔧 Configuración
 
-Definidos en `package.json`:
+### TypeScript
 
-- `dev`: `bun run --hot src/index.ts`
+El proyecto está configurado con las siguientes opciones de TypeScript:
 
-El modo `--hot` aplica recarga en caliente al editar el código.
-
-## 🔍 Notas de desarrollo
-
-- La app Hono se exporta por defecto desde `src/index.ts`, lo que permite a Bun servirla automáticamente como handler `fetch` en `http://localhost:3000`.
-- Mantén las rutas simples y puras; añade nuevas rutas importando y componiendo instancias de `Hono`.
-
-## 🧪 (Opcional) Prueba rápida en código
-
-Si quieres un test mínimo con el runner de Bun, puedes crear `src/index.test.ts` con:
-
-```ts
-import { expect, test } from "bun:test";
-import app from "./index";
-
-test("GET /", async () => {
-  const res = await app.request("/");
-  expect(res.status).toBe(200);
-  expect(await res.text()).toBe("Hello Hono!");
-});
+```json
+{
+  "compilerOptions": {
+    "strict": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx"
+  }
+}
 ```
 
-Y ejecutarlo con:
+## 🤝 Contribución
 
-```sh
-bun test
-```
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
 
-## ✨ Futuras extensiones (cuando apliquen)
+## 📝 Licencia
 
-- Añadir nuevas rutas y middlewares (auth, validación, etc.).
-- Integrar base de datos o clientes externos según necesidad.
+Este proyecto está bajo la Licencia MIT. Ve el archivo [LICENSE](LICENSE) para más detalles.
 
-MIT — feel free to use this as a foundation for your own APIs.
+## 👨‍💻 Autor
+
+**Lostovayne**
+
+- GitHub: [@Lostovayne](https://github.com/Lostovayne)
+
+## 🙏 Agradecimientos
+
+- [Hono](https://hono.dev/) - Por el increíble framework web
+- [Bun](https://bun.sh/) - Por el runtime ultrarrápido
+- [PostgreSQL](https://www.postgresql.org/) - Por la robusta base de datos
+
+---
+
+⭐ ¡Dale una estrella al proyecto si te ha sido útil!
