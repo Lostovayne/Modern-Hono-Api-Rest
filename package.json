@@ -6,12 +6,16 @@
   "dependencies": {
     "drizzle-orm": "^0.44.4",
     "hono": "^4.9.4",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.5",
     "pg": "^8.16.3"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.2.2",
     "@types/bun": "latest",
     "@types/pg": "^8.15.5",
     "drizzle-kit": "^0.31.4",
-    "drizzle-seed": "^0.3.1"
+    "drizzle-seed": "^0.3.1",
+    "ultracite": "5.2.16"
   }
 }
