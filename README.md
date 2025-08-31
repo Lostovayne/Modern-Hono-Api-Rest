@@ -1,178 +1,201 @@
-# Hono API REST
+# Hono API with Drizzle ORM and PostgreSQL
 
-Una API REST moderna y eficiente construida con [Hono](https://hono.dev/), un framework web ultrarrápido para JavaScript/TypeScript que funciona en cualquier runtime.
+This project is a modern, high-performance REST API built with [Hono](https://hono.dev/), a lightweight and fast web framework, and [Drizzle ORM](https://orm.drizzle.team/) for type-safe database access to a PostgreSQL database. It includes a complete setup for local development and containerization with Docker.
 
-## 🚀 Características
+## Features
 
-- **⚡ Ultra rápido**: Construido con Hono, optimizado para rendimiento
-- **🔧 TypeScript**: Desarrollo type-safe con soporte completo de TypeScript
-- **🐳 Docker Ready**: Configuración Docker Compose incluida
-- **🗃️ Base de datos**: PostgreSQL 17.5 Alpine configurado
-- **🔄 Hot Reload**: Desarrollo con recarga automática usando Bun
-- **📦 Runtime moderno**: Ejecutado con Bun para máximo rendimiento
+- **🚀 Ultra-fast:** Built on Hono for exceptional performance.
+- **🔒 Type-Safe:** End-to-end type safety with TypeScript and Drizzle ORM.
+- **🐳 Dockerized:** Comes with a `docker-compose.yml` for easy setup of the PostgreSQL database.
+- **🐘 PostgreSQL:** Uses PostgreSQL as the database.
+- **🔥 Hot-Reload:** Live-reloading for a smooth development experience powered by Bun.
+- **💅 Code Quality:** Includes [Biome](https://biomejs.dev/) for formatting and linting, and [Husky](https://typicode.github.io/husky/) for pre-commit hooks.
 
-## 🛠️ Stack Tecnológico
+## Tech Stack
 
-- **Framework**: [Hono](https://hono.dev/) v4.9.4
-- **Runtime**: [Bun](https://bun.sh/)
-- **Base de datos**: PostgreSQL 17.5 Alpine
-- **Lenguaje**: TypeScript
-- **Containerización**: Docker & Docker Compose
+- **Framework:** [Hono](https://hono.dev/)
+- **ORM:** [Drizzle ORM](https://orm.drizzle.team/)
+- **Database:** [PostgreSQL](https://www.postgresql.org/)
+- **Runtime:** [Bun](https://bun.sh/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Containerization:** [Docker](https://www.docker.com/) & [Docker Compose](https://docs.docker.com/compose/)
+- **Code Quality:** [Biome JS](https://biomejs.dev/), [Husky](https://typicode.github.io/husky/), [lint-staged](https://github.com/lint-staged/lint-staged)
 
-## 📋 Prerrequisitos
+## Project Structure
 
-Antes de comenzar, asegúrate de tener instalado:
-
-- [Bun](https://bun.sh/) (v1.0 o superior)
-- [Docker](https://www.docker.com/) y Docker Compose
-- [Git](https://git-scm.com/)
-
-## 🚀 Instalación y Configuración
-
-### 1. Clonar el repositorio
-
-```bash
-git clone https://github.com/Lostovayne/Hono-Api-Rest.git
-cd Hono-Api-Rest
+```
+hono-drizzle/
+├── src/
+│   ├── db/
+│   │   ├── db.ts           # Drizzle DB instance
+│   │   └── schema.ts       # Database schema definitions
+│   └── index.ts          # Application entry point and API routes
+├── .gitignore
+├── biome.jsonc           # Biome configuration
+├── docker-compose.yml    # Docker Compose setup for PostgreSQL
+├── drizzle.config.ts     # Drizzle ORM configuration
+├── package.json          # Project dependencies and scripts
+├── tsconfig.json         # TypeScript configuration
+└── README.md             # Project documentation
 ```
 
-### 2. Instalar dependencias
+## Prerequisites
+
+Make sure you have the following installed on your system:
+
+- [Bun](https://bun.sh/) (v1.0 or higher)
+- [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
+- [Git](https://git-scm.com/)
+
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/hono-drizzle.git
+cd hono-drizzle
+```
+
+### 2. Install dependencies
 
 ```bash
 bun install
 ```
 
-### 3. Configurar la base de datos
+### 3. Set up the database
 
-Inicia la base de datos PostgreSQL usando Docker Compose:
+Start the PostgreSQL database using Docker Compose:
 
 ```bash
 docker-compose up -d
 ```
 
-Esto creará un contenedor PostgreSQL con la siguiente configuración:
+This will create a PostgreSQL container with the following configuration:
+- **Host**: `localhost`
+- **Port**: `5432`
+- **Database**: `todos`
+- **User**: `user`
+- **Password**: `password`
 
-- **Host**: localhost
-- **Puerto**: 5432
-- **Base de datos**: todos
-- **Usuario**: user
-- **Contraseña**: password
+You will also need to set the `DATABASE_URL` environment variable. You can create a `.env` file in the root of the project with the following content:
 
-### 4. Ejecutar la aplicación
+```
+DATABASE_URL=postgresql://user:password@localhost:5432/todos
+```
 
-Para desarrollo con hot reload:
+### 4. Run database migrations
+
+Apply the database schema to your database:
+
+```bash
+bun run db:migrate
+```
+
+### 5. Run the application
+
+To start the development server with hot-reloading:
 
 ```bash
 bun run dev
 ```
 
-La API estará disponible en `http://localhost:3000`
+The API will be available at `http://localhost:3000`.
 
-## 🔧 Scripts Disponibles
+## API Endpoints
 
-| Script        | Descripción                                          |
-| ------------- | ---------------------------------------------------- |
-| `bun run dev` | Inicia el servidor en modo desarrollo con hot reload |
+### Base Endpoint
 
-## 📡 API Endpoints
+| Method | Endpoint | Description             |
+| :----- | :------- | :---------------------- |
+| `GET`  | `/`      | Basic greeting endpoint |
 
-### Endpoints Base
-
-| Método | Endpoint | Descripción               |
-| ------ | -------- | ------------------------- |
-| `GET`  | `/`      | Endpoint de saludo básico |
-
-### Ejemplo de respuesta
+**Example response:**
 
 ```bash
 curl http://localhost:3000/
-# Respuesta: Hello Hono!
+# Response: Hello Hono!
 ```
 
-## 🐳 Docker
+## Database
 
-### Ejecutar con Docker Compose
+The database schema is defined in `src/db/schema.ts` using Drizzle ORM.
 
-```bash
-# Iniciar todos los servicios
-docker-compose up -d
+### Schema
 
-# Ver logs
-docker-compose logs -f
+The project includes two tables: `users` and `todos`.
 
-# Detener servicios
-docker-compose down
-```
+- **`users`**: Stores user information.
+- **`todos`**: Stores todo items, with a foreign key relationship to the `users` table.
 
-### Configuración de PostgreSQL
+### Migrations
 
-La base de datos PostgreSQL se configura automáticamente con:
+Database migrations are managed with `drizzle-kit`.
 
-```yaml
-services:
-  postgres:
-    image: postgres:17.5-alpine
-    ports:
-      - 5432:5432
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: todos
-```
+- **Generate a new migration:**
 
-## 🏗️ Estructura del Proyecto
+  ```bash
+  bun run db:generate:migration
+  ```
 
-```
-hono-drizzle/
-├── src/
-│   └── index.ts          # Punto de entrada de la aplicación
-├── docker-compose.yml    # Configuración de Docker Compose
-├── package.json          # Dependencias y scripts
-├── tsconfig.json         # Configuración de TypeScript
-├── bun.lock             # Lock file de Bun
-└── README.md            # Documentación del proyecto
-```
+- **Apply migrations:**
 
-## 🔧 Configuración
+  ```bash
+  bun run db:migrate
+  ```
 
-### TypeScript
+- **Drizzle Studio:**
 
-El proyecto está configurado con las siguientes opciones de TypeScript:
+  Open a web-based GUI for your database:
+  ```bash
+  bun run db:studio
+  ```
 
-```json
-{
-  "compilerOptions": {
-    "strict": true,
-    "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx"
-  }
-}
-```
+## Tooling
 
-## 🤝 Contribución
+### Biome
 
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
+This project uses [Biome](https://biomejs.dev/) for code formatting and linting. The configuration is in `biome.jsonc`.
 
-## 📝 Licencia
+- **Format all files:**
+  ```bash
+  bun run format
+  ```
+- **Lint all files:**
+  ```bash
+  bun run lint
+  ```
+- **Check all files (format and lint):**
+  ```bash
+  bun run check
+  ```
 
-Este proyecto está bajo la Licencia MIT. Ve el archivo [LICENSE](LICENSE) para más detalles.
+### Husky and lint-staged
 
-## 👨‍💻 Autor
+[Husky](https://typicode.github.io/husky/) is used to run scripts at different stages of the git process. A `pre-commit` hook is configured to run `lint-staged`, which in turn runs `bun format` and `bun lint` on staged files. This ensures that all committed code is formatted and linted correctly.
 
-**Lostovayne**
+## Available Scripts
 
-- GitHub: [@Lostovayne](https://github.com/Lostovayne)
+| Script                    | Description                                             |
+| :------------------------ | :------------------------------------------------------ |
+| `bun run dev`             | Starts the development server with hot-reloading.       |
+| `bun run prepare`         | Installs Husky hooks.                                   |
+| `bun run format`          | Formats the code using Biome.                           |
+| `bun run lint`            | Lints the code using Biome.                             |
+| `bun run check`           | Runs both the linter and formatter.                     |
+| `bun run db:generate:migration` | Generates a new database migration file.                |
+| `bun run db:migrate`      | Applies all pending migrations to the database.         |
+| `bun run db:studio`       | Starts Drizzle Studio, a GUI for the database.          |
 
-## 🙏 Agradecimientos
+## Contributing
 
-- [Hono](https://hono.dev/) - Por el increíble framework web
-- [Bun](https://bun.sh/) - Por el runtime ultrarrápido
-- [PostgreSQL](https://www.postgresql.org/) - Por la robusta base de datos
+Contributions are welcome! Please follow these steps:
 
----
+1.  Fork the project.
+2.  Create a new branch (`git checkout -b feature/AmazingFeature`).
+3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+4.  Push to the branch (`git push origin feature/AmazingFeature`).
+5.  Open a Pull Request.
 
-⭐ ¡Dale una estrella al proyecto si te ha sido útil!
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for more details.
