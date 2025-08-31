@@ -1,7 +1,11 @@
 {
   "name": "hono-drizzle",
   "scripts": {
-    "dev": "bun run --hot src/index.ts"
+    "dev": "bun run --hot src/index.ts",
+    "prepare": "husky",
+    "format": "bunx @biomejs/biome format --write .",
+    "lint": "bunx @biomejs/biome lint . --fix",
+    "check": "bunx @biomejs/biome check ."
   },
   "dependencies": {
     "drizzle-orm": "^0.44.4",
@@ -17,5 +21,11 @@
     "drizzle-kit": "^0.31.4",
     "drizzle-seed": "^0.3.1",
     "ultracite": "5.2.16"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,json,jsonc,css,md,mdx}": [
+      "bun format",
+      "bun lint"
+    ]
   }
 }
