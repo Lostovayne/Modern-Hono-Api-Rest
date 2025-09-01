@@ -8,7 +8,8 @@
     "check": "bunx @biomejs/biome check .",
     "db:generate:migration": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "db:seed": "bun run scripts/seed.script.ts"
   },
   "dependencies": {
     "drizzle-orm": "^0.44.4",
