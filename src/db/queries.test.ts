@@ -1,5 +1,24 @@
-import { describe, expect, it } from 'bun:test';
+import { describe, expect, it, mock } from 'bun:test';
+import { afterEach, beforeEach } from 'node:test';
+import {
+  createTestDb,
+  destroyTestDb,
+  type TestDbContext,
+} from '../test/setup-test-db';
 import { insertTodo, type NewTodo } from './queries';
+
+let ctx: TestDbContext;
+
+beforeEach(async () => {
+  ctx = await createTestDb();
+  await mock.module('../db/db', () => ({
+    db: ctx.db,
+  }));
+});
+
+afterEach(async () => {
+  await destroyTestDb(ctx);
+});
 
 describe('Insert Todo', () => {
   it('should insert a new todo', async () => {
@@ -13,6 +32,7 @@ describe('Insert Todo', () => {
     const todo = await insertTodo(newTodo);
 
     expect(todo).toHaveProperty('id');
+
     expect(todo.userId).toBe(newTodo.userId);
   });
 });

@@ -1,13 +1,21 @@
 import { randomUUID } from 'node:crypto';
 import { join } from 'node:path';
-import { drizzle } from 'drizzle-orm/node-postgres';
+import { drizzle, type NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { migrate } from 'drizzle-orm/node-postgres/migrator';
 import { Pool } from 'pg';
-import { todosTable, usersTable } from '../db/schema';
+
+// biome-ignore lint/performance/noNamespaceImport: <No es eficiente en este caso>
+import * as schema from '../db/schema';
+
+export type TestDbContext = {
+  pool: Pool;
+  db: NodePgDatabase<typeof schema>;
+  testDbName: string;
+};
 
 const adminDbUrl = process.env.ADMIN_DB_URL;
 
-export async function createTestDb() {
+export async function createTestDb(): Promise<TestDbContext> {
   if (!adminDbUrl) {
     throw new Error('ADMIN_DB_URL is not defined in environment variables');
   }
@@ -26,7 +34,7 @@ export async function createTestDb() {
   });
 
   const db = drizzle(pool, {
-    schema: { users: usersTable, todos: todosTable },
+    schema,
     casing: 'snake_case',
   });
 
@@ -34,13 +42,7 @@ export async function createTestDb() {
   return { db, pool, testDbName };
 }
 
-export async function destroyTestDb({
-  pool,
-  testDbName,
-}: {
-  pool: Pool;
-  testDbName: string;
-}) {
+export async function destroyTestDb({ pool, testDbName }: TestDbContext) {
   await pool.end();
   const adminPool = new Pool({ connectionString: adminDbUrl });
   await adminPool.query(
