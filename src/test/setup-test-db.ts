@@ -16,10 +16,6 @@ export type TestDbContext = {
 const adminDbUrl = process.env.ADMIN_DB_URL;
 
 export async function createTestDb(): Promise<TestDbContext> {
-  if (!adminDbUrl) {
-    throw new Error('ADMIN_DB_URL is not defined in environment variables');
-  }
-
   const testDbName = `test_db_${randomUUID().replace(/-/g, '')}`;
   const testDbUrl = `postgres://user:password@localhost:5432/${testDbName}`;
 
@@ -38,17 +34,24 @@ export async function createTestDb(): Promise<TestDbContext> {
     casing: 'snake_case',
   });
 
-  await migrate(db, { migrationsFolder: join(__dirname, '../db/migrations') });
+  await migrate(db, {
+    migrationsFolder: join(__dirname, '../db/drizzle'),
+  });
+
   return { db, pool, testDbName };
 }
 
 export async function destroyTestDb({ pool, testDbName }: TestDbContext) {
   await pool.end();
   const adminPool = new Pool({ connectionString: adminDbUrl });
-  await adminPool.query(
-    'SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = $1 AND pid <> pg_backend_pid()',
-    [testDbName]
-  );
-  await adminPool.query(`DROP DATABASE IF EXISTS ${testDbName}`);
-  await adminPool.end();
+
+  try {
+    await adminPool.query(
+      'SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = $1 AND pid <> pg_backend_pid()',
+      [testDbName]
+    );
+    await adminPool.query(`DROP DATABASE IF EXISTS ${testDbName}`);
+  } finally {
+    await adminPool.end();
+  }
 }

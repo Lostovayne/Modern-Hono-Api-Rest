@@ -1,29 +1,37 @@
-import { describe, expect, it, mock } from 'bun:test';
-import { afterEach, beforeEach } from 'node:test';
+import { afterEach, beforeEach, describe, expect, it, mock } from 'bun:test';
 import {
   createTestDb,
   destroyTestDb,
   type TestDbContext,
 } from '../test/setup-test-db';
-import { insertTodo, type NewTodo } from './queries';
+import { insertTodo, insertUser, type NewTodo } from './queries';
 
-let ctx: TestDbContext;
+let ctx: TestDbContext | undefined;
 
 beforeEach(async () => {
   ctx = await createTestDb();
+  if (!ctx) {
+    throw new Error('Failed to create test database');
+  }
+  const testDb = ctx.db;
   await mock.module('../db/db', () => ({
-    db: ctx.db,
+    db: testDb,
   }));
 });
 
 afterEach(async () => {
-  await destroyTestDb(ctx);
+  if (ctx) {
+    await destroyTestDb(ctx);
+    ctx = undefined;
+  }
 });
 
 describe('Insert Todo', () => {
   it('should insert a new todo', async () => {
+    const userId = await insertUser('test@test.com', 'password123');
+
     const newTodo = {
-      userId: 'd049e186-b9e4-48e8-4966-bf777df7727c',
+      userId,
       title: 'Test Todo new',
       description: 'This is a test todo',
       completed: false,
@@ -32,7 +40,6 @@ describe('Insert Todo', () => {
     const todo = await insertTodo(newTodo);
 
     expect(todo).toHaveProperty('id');
-
     expect(todo.userId).toBe(newTodo.userId);
   });
 });

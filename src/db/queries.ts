@@ -1,13 +1,28 @@
 import type { UUID } from 'node:crypto';
+import { password } from 'bun';
 import { eq } from 'drizzle-orm';
 import { db } from './db';
-import { todosTable } from './schema';
+import { todosTable, usersTable } from './schema';
 
 export type NewTodo = {
   userId: UUID;
   title: string;
   description?: string;
   completed?: boolean;
+};
+
+export const insertUser = async (email: string, passwordUser: string) => {
+  const passwordHash = await password.hash(passwordUser);
+
+  const [user] = await db
+    .insert(usersTable)
+    .values({
+      email,
+      passwordHash,
+    })
+    .returning();
+
+  return user.id as UUID;
 };
 
 export const insertTodo = async (newTodo: NewTodo) => {
