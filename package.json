@@ -5,7 +5,7 @@
     "prepare": "husky",
     "format": "bunx @biomejs/biome format --write .",
     "lint": "bunx @biomejs/biome lint . --fix",
-    "check": "bunx @biomejs/biome check .",
+    "check": "bunx @biomejs/biome check . --fix",
     "db:generate:migration": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
@@ -29,6 +29,7 @@
   "lint-staged": {
     "*.{js,ts,tsx,json,jsonc,css,md,mdx}": [
       "bun format",
+      "bun check ",
       "bun lint"
     ]
   }
