@@ -1,7 +1,7 @@
-import { randomUUID } from 'node:crypto';
-import { join } from 'node:path';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { migrate } from 'drizzle-orm/node-postgres/migrator';
+import { randomUUID } from 'node:crypto';
+import { join } from 'node:path';
 import { Pool } from 'pg';
 import { todosTable, usersTable } from '../db/schema';
 
@@ -31,6 +31,22 @@ export async function createTestDb() {
   });
 
   await migrate(db, { migrationsFolder: join(__dirname, '../db/migrations') });
-
   return { db, pool, testDbName };
+}
+
+export async function destroyTestDb({
+  pool,
+  testDbName,
+}: {
+  pool: Pool;
+  testDbName: string;
+}) {
+  await pool.end();
+  const adminPool = new Pool({ connectionString: adminDbUrl });
+  await adminPool.query(
+    'SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = $1 AND pid <> pg_backend_pid()',
+    [testDbName]
+  );
+  await adminPool.query(`DROP DATABASE IF EXISTS ${testDbName}`);
+  await adminPool.end();
 }
