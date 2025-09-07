@@ -647,7 +647,7 @@ Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](L
 <div align="center">
 
 <img src="https://raw.githubusercontent.com/honojs/hono/main/docs/images/hono-logo.png" alt="Hono" width="30" height="30" style="margin-right: 10px;" />
-<img src="https://orm.drizzle.team/img/drizzle-logo.svg" alt="Drizzle" width="30" height="30" style="margin-right: 10px;" />
+<img src="https://orm.drizzle.team/favicon.ico" alt="Drizzle" width="30" height="30" style="margin-right: 10px;" />
 <img src="https://wiki.postgresql.org/images/3/30/PostgreSQL_logo.3colors.120x120.png" alt="PostgreSQL" width="30" height="30" style="margin-right: 10px;" />
 <img src="https://bun.sh/logo.svg" alt="Bun" width="30" height="30" />
 
