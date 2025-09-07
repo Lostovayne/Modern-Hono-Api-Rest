@@ -1,201 +1,529 @@
-# Hono API with Drizzle ORM and PostgreSQL
+<div align="center">
 
-This project is a modern, high-performance REST API built with [Hono](https://hono.dev/), a lightweight and fast web framework, and [Drizzle ORM](https://orm.drizzle.team/) for type-safe database access to a PostgreSQL database. It includes a complete setup for local development and containerization with Docker.
+# 🚀 Hono API with Drizzle ORM and PostgreSQL
 
-## Features
+<p align="center">
+  <img src="https://img.shields.io/badge/Hono-4.9.4-blue?style=for-the-badge&logo=hono" alt="Hono" />
+  <img src="https://img.shields.io/badge/Drizzle_ORM-0.44.4-orange?style=for-the-badge&logo=drizzle" alt="Drizzle ORM" />
+  <img src="https://img.shields.io/badge/PostgreSQL-17.5-blue?style=for-the-badge&logo=postgresql" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/TypeScript-Latest-blue?style=for-the-badge&logo=typescript" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Bun-Latest-black?style=for-the-badge&logo=bun" alt="Bun" />
+</p>
 
-- **🚀 Ultra-fast:** Built on Hono for exceptional performance.
-- **🔒 Type-Safe:** End-to-end type safety with TypeScript and Drizzle ORM.
-- **🐳 Dockerized:** Comes with a `docker-compose.yml` for easy setup of the PostgreSQL database.
-- **🐘 PostgreSQL:** Uses PostgreSQL as the database.
-- **🔥 Hot-Reload:** Live-reloading for a smooth development experience powered by Bun.
-- **💅 Code Quality:** Includes [Biome](https://biomejs.dev/) for formatting and linting, and [Husky](https://typicode.github.io/husky/) for pre-commit hooks.
+<p align="center">
+  Una API REST moderna y de alto rendimiento construida con <a href="https://hono.dev/">Hono</a>, un framework web ligero y rápido, y <a href="https://orm.drizzle.team/">Drizzle ORM</a> para acceso a base de datos PostgreSQL con seguridad de tipos. Incluye una configuración completa para desarrollo local y contenerización con Docker.
+</p>
 
-## Tech Stack
+</div>
 
-- **Framework:** [Hono](https://hono.dev/)
-- **ORM:** [Drizzle ORM](https://orm.drizzle.team/)
-- **Database:** [PostgreSQL](https://www.postgresql.org/)
-- **Runtime:** [Bun](https://bun.sh/)
-- **Language:** [TypeScript](https://www.typescriptlang.org/)
-- **Containerization:** [Docker](https://www.docker.com/) & [Docker Compose](https://docs.docker.com/compose/)
-- **Code Quality:** [Biome JS](https://biomejs.dev/), [Husky](https://typicode.github.io/husky/), [lint-staged](https://github.com/lint-staged/lint-staged)
+## ✨ Características
 
-## Project Structure
+<div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
 
-```
+<div class="feature-card" style="padding: 1rem; border-radius: 8px; background-color: #f8f9fa; border-left: 4px solid #4285f4;">
+  <h3>🚀 Ultra-rápido</h3>
+  <p>Construido con Hono para un rendimiento excepcional en aplicaciones web.</p>
+</div>
+
+<div class="feature-card" style="padding: 1rem; border-radius: 8px; background-color: #f8f9fa; border-left: 4px solid #34a853;">
+  <h3>🔒 Seguridad de tipos</h3>
+  <p>Seguridad de tipos de extremo a extremo con TypeScript y Drizzle ORM.</p>
+</div>
+
+<div class="feature-card" style="padding: 1rem; border-radius: 8px; background-color: #f8f9fa; border-left: 4px solid #fbbc05;">
+  <h3>🐳 Dockerizado</h3>
+  <p>Incluye <code>docker-compose.yml</code> para configuración fácil de PostgreSQL.</p>
+</div>
+
+<div class="feature-card" style="padding: 1rem; border-radius: 8px; background-color: #f8f9fa; border-left: 4px solid #ea4335;">
+  <h3>🐘 PostgreSQL</h3>
+  <p>Utiliza PostgreSQL como base de datos principal.</p>
+</div>
+
+<div class="feature-card" style="padding: 1rem; border-radius: 8px; background-color: #f8f9fa; border-left: 4px solid #673ab7;">
+  <h3>🔥 Hot-Reload</h3>
+  <p>Recarga en vivo para una experiencia de desarrollo fluida con Bun.</p>
+</div>
+
+<div class="feature-card" style="padding: 1rem; border-radius: 8px; background-color: #f8f9fa; border-left: 4px solid #ff9800;">
+  <h3>💅 Calidad de código</h3>
+  <p>Incluye <a href="https://biomejs.dev/">Biome</a> para formateo y linting, y <a href="https://typicode.github.io/husky/">Husky</a> para hooks pre-commit.</p>
+</div>
+
+</div>
+
+## 🛠️ Stack Tecnológico
+
+<div class="tech-stack" style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+
+<div class="tech-item" style="text-align: center; width: 120px;">
+  <img src="https://raw.githubusercontent.com/honojs/hono/main/docs/images/hono-logo.png" alt="Hono" width="60" height="60" />
+  <p><a href="https://hono.dev/">Hono</a></p>
+</div>
+
+<div class="tech-item" style="text-align: center; width: 120px;">
+  <img src="https://avatars.githubusercontent.com/u/108468352?s=200&v=4" alt="Drizzle ORM" width="60" height="60" />
+  <p><a href="https://orm.drizzle.team/">Drizzle ORM</a></p>
+</div>
+
+<div class="tech-item" style="text-align: center; width: 120px;">
+  <img src="https://wiki.postgresql.org/images/3/30/PostgreSQL_logo.3colors.120x120.png" alt="PostgreSQL" width="60" height="60" />
+  <p><a href="https://www.postgresql.org/">PostgreSQL</a></p>
+</div>
+
+<div class="tech-item" style="text-align: center; width: 120px;">
+  <img src="https://avatars.githubusercontent.com/u/99780871?s=200&v=4" alt="Bun" width="60" height="60" />
+  <p><a href="https://bun.sh/">Bun</a></p>
+</div>
+
+<div class="tech-item" style="text-align: center; width: 120px;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg" alt="TypeScript" width="60" height="60" />
+  <p><a href="https://www.typescriptlang.org/">TypeScript</a></p>
+</div>
+
+<div class="tech-item" style="text-align: center; width: 120px;">
+  <img src="https://www.docker.com/wp-content/uploads/2022/03/vertical-logo-monochromatic.png" alt="Docker" width="60" height="60" />
+  <p><a href="https://www.docker.com/">Docker</a></p>
+</div>
+
+<div class="tech-item" style="text-align: center; width: 120px;">
+  <img src="https://avatars.githubusercontent.com/u/103283236?s=200&v=4" alt="Biome" width="60" height="60" />
+  <p><a href="https://biomejs.dev/">Biome</a></p>
+</div>
+
+</div>
+
+## 📁 Estructura del Proyecto
+
+<div class="project-structure" style="background-color: #f8f9fa; padding: 1rem; border-radius: 8px; font-family: 'Courier New', monospace;">
+
+```bash
 hono-drizzle/
 ├── src/
 │   ├── db/
-│   │   ├── db.ts           # Drizzle DB instance
-│   │   └── schema.ts       # Database schema definitions
-│   └── index.ts          # Application entry point and API routes
+│   │   ├── db.ts           # Instancia de Drizzle DB
+│   │   ├── drizzle/        # Migraciones generadas
+│   │   ├── queries.ts      # Consultas a la base de datos
+│   │   ├── queries.test.ts # Tests para las consultas
+│   │   └── schema.ts       # Definiciones del esquema de la BD
+│   ├── index.ts            # Punto de entrada y rutas API
+│   └── test/
+│       └── setup-test-db.ts # Configuración de BD para tests
+├── scripts/
+│   └── seed.script.ts      # Script para poblar la BD
+├── .github/                # Configuración de GitHub
+├── .husky/                 # Hooks de Git
 ├── .gitignore
-├── biome.jsonc           # Biome configuration
-├── docker-compose.yml    # Docker Compose setup for PostgreSQL
-├── drizzle.config.ts     # Drizzle ORM configuration
-├── package.json          # Project dependencies and scripts
-├── tsconfig.json         # TypeScript configuration
-└── README.md             # Project documentation
+├── biome.jsonc             # Configuración de Biome
+├── docker-compose.yml      # Configuración de Docker Compose
+├── drizzle.config.ts       # Configuración de Drizzle ORM
+├── package.json            # Dependencias y scripts
+├── tsconfig.json           # Configuración de TypeScript
+└── README.md               # Documentación del proyecto
 ```
 
-## Prerequisites
+</div>
 
-Make sure you have the following installed on your system:
+## 📋 Requisitos Previos
 
-- [Bun](https://bun.sh/) (v1.0 or higher)
-- [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
-- [Git](https://git-scm.com/)
+<div class="prerequisites" style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #4285f4;">
 
-## Getting Started
+Asegúrate de tener instalado lo siguiente en tu sistema:
 
-### 1. Clone the repository
+<div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+  <img src="https://bun.sh/logo.svg" alt="Bun" width="24" height="24" style="margin-right: 10px;" />
+  <a href="https://bun.sh/">Bun</a> (v1.0 o superior)
+</div>
+
+<div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+  <img src="https://www.docker.com/wp-content/uploads/2022/03/vertical-logo-monochromatic.png" alt="Docker" width="24" height="24" style="margin-right: 10px;" />
+  <a href="https://www.docker.com/">Docker</a> y <a href="https://docs.docker.com/compose/">Docker Compose</a>
+</div>
+
+<div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+  <img src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" alt="Git" width="24" height="24" style="margin-right: 10px;" />
+  <a href="https://git-scm.com/">Git</a>
+</div>
+
+</div>
+
+## 🚀 Primeros Pasos
+
+<div class="getting-started" style="background-color: #f8f9fa; padding: 1rem; border-radius: 8px;">
+
+### 1. Clonar el repositorio
+
+<div class="code-block" style="background-color: #282c34; color: #abb2bf; padding: 1rem; border-radius: 4px; margin-bottom: 1rem;">
 
 ```bash
 git clone https://github.com/your-username/hono-drizzle.git
 cd hono-drizzle
 ```
 
-### 2. Install dependencies
+</div>
+
+### 2. Instalar dependencias
+
+<div class="code-block" style="background-color: #282c34; color: #abb2bf; padding: 1rem; border-radius: 4px; margin-bottom: 1rem;">
 
 ```bash
 bun install
 ```
 
-### 3. Set up the database
+</div>
 
-Start the PostgreSQL database using Docker Compose:
+### 3. Configurar la base de datos
+
+Inicia la base de datos PostgreSQL usando Docker Compose:
+
+<div class="code-block" style="background-color: #282c34; color: #abb2bf; padding: 1rem; border-radius: 4px; margin-bottom: 1rem;">
 
 ```bash
 docker-compose up -d
 ```
 
-This will create a PostgreSQL container with the following configuration:
-- **Host**: `localhost`
-- **Port**: `5432`
-- **Database**: `todos`
-- **User**: `user`
-- **Password**: `password`
+</div>
 
-You will also need to set the `DATABASE_URL` environment variable. You can create a `.env` file in the root of the project with the following content:
+Esto creará un contenedor PostgreSQL con la siguiente configuración:
+
+<div class="db-config" style="display: grid; grid-template-columns: auto 1fr; gap: 0.5rem; margin-bottom: 1rem;">
+  <div style="font-weight: bold;">Host:</div>
+  <div><code>localhost</code></div>
+  <div style="font-weight: bold;">Puerto:</div>
+  <div><code>5432</code></div>
+  <div style="font-weight: bold;">Base de datos:</div>
+  <div><code>todos</code></div>
+  <div style="font-weight: bold;">Usuario:</div>
+  <div><code>user</code></div>
+  <div style="font-weight: bold;">Contraseña:</div>
+  <div><code>password</code></div>
+</div>
+
+También necesitarás configurar la variable de entorno `DATABASE_URL`. Puedes crear un archivo `.env` en la raíz del proyecto con el siguiente contenido:
+
+<div class="code-block" style="background-color: #282c34; color: #abb2bf; padding: 1rem; border-radius: 4px; margin-bottom: 1rem;">
 
 ```
 DATABASE_URL=postgresql://user:password@localhost:5432/todos
 ```
 
-### 4. Run database migrations
+</div>
 
-Apply the database schema to your database:
+### 4. Ejecutar migraciones de la base de datos
+
+Aplica el esquema de la base de datos:
+
+<div class="code-block" style="background-color: #282c34; color: #abb2bf; padding: 1rem; border-radius: 4px; margin-bottom: 1rem;">
 
 ```bash
 bun run db:migrate
 ```
 
-### 5. Run the application
+</div>
 
-To start the development server with hot-reloading:
+### 5. Ejecutar la aplicación
+
+Para iniciar el servidor de desarrollo con recarga en caliente:
+
+<div class="code-block" style="background-color: #282c34; color: #abb2bf; padding: 1rem; border-radius: 4px; margin-bottom: 1rem;">
 
 ```bash
 bun run dev
 ```
 
-The API will be available at `http://localhost:3000`.
+</div>
 
-## API Endpoints
+</div>
 
-### Base Endpoint
+La API estará disponible en `http://localhost:3000`.
 
-| Method | Endpoint | Description             |
-| :----- | :------- | :---------------------- |
-| `GET`  | `/`      | Basic greeting endpoint |
+</div>
 
-**Example response:**
+## 🚀 API Endpoints
+
+<div class="api-endpoints" style="background-color: #f8f9fa; padding: 1rem; border-radius: 8px;">
+
+### Usuarios
+
+| Método | Ruta | Descripción |
+|--------|------|-------------|
+| `GET` | `/users` | Obtiene todos los usuarios |
+| `GET` | `/users/:id` | Obtiene un usuario por ID |
+| `POST` | `/users` | Crea un nuevo usuario |
+| `PUT` | `/users/:id` | Actualiza un usuario existente |
+| `DELETE` | `/users/:id` | Elimina un usuario |
+
+### Tareas
+
+| Método | Ruta | Descripción |
+|--------|------|-------------|
+| `GET` | `/todos` | Obtiene todas las tareas |
+| `GET` | `/todos/:id` | Obtiene una tarea por ID |
+| `POST` | `/todos` | Crea una nueva tarea |
+| `PUT` | `/todos/:id` | Actualiza una tarea existente |
+| `DELETE` | `/todos/:id` | Elimina una tarea |
+
+</div>
+
+## 🤝 Contribuir
+
+<div class="contributing" style="background-color: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #34a853;">
+
+Las contribuciones son bienvenidas. Por favor, sigue estos pasos:
+
+1. Haz fork del repositorio
+2. Crea una rama para tu característica (`git checkout -b feature/amazing-feature`)
+3. Haz commit de tus cambios (`git commit -m 'feat: añadir nueva característica'`)
+4. Haz push a la rama (`git push origin feature/amazing-feature`)
+5. Abre un Pull Request
+
+</div>
+
+## 📄 Licencia
+
+<div class="license" style="background-color: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #fbbc05;">
+
+Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
+
+</div>
+
+---
+
+<div align="center">
+Hecho con ❤️ usando <a href="https://hono.dev/">Hono</a> y <a href="https://orm.drizzle.team/">Drizzle ORM</a>
+</div>
+
+### Ejemplo de Uso
+
+<div class="example" style="background-color: #282c34; color: #abb2bf; padding: 1rem; border-radius: 4px; margin-bottom: 1rem; font-family: 'Courier New', monospace;">
+
+```bash
+# Obtener todos los usuarios
+curl -X GET http://localhost:3000/api/users
+
+# Crear un nuevo usuario
+curl -X POST http://localhost:3000/api/users \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Juan Pérez","email":"juan@example.com"}'
+
+# Obtener todas las tareas
+curl -X GET http://localhost:3000/api/todos
+```
+
+</div>
+
+### Ejemplo de Respuesta
+
+<div class="response" style="background-color: #f8f9fa; padding: 1rem; border-radius: 8px;">
+
+```json
+// Respuesta al obtener todos los usuarios
+[
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "email": "usuario@ejemplo.com",
+    "name": "Juan Pérez",
+    "createdAt": "2023-04-01T12:00:00Z",
+    "updatedAt": "2023-04-01T12:00:00Z"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440001",
+    "email": "otro@ejemplo.com",
+    "name": "Ana García",
+    "createdAt": "2023-04-02T10:30:00Z",
+    "updatedAt": "2023-04-02T10:30:00Z"
+  }
+]
+```
+
+</div>
+
+## 🧪 Desarrollo y Testing
+
+<div class="development" style="background-color: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #673ab7;">
+
+Este proyecto incluye herramientas para mantener la calidad del código y facilitar el desarrollo:
+
+- **Tests automatizados**: Ejecuta los tests con `bun test`
+- **Pre-commit hooks**: Configurados con Husky para verificar el formato y linting antes de cada commit
+- **Drizzle Studio**: Interfaz visual para gestionar la base de datos con `bun run db:studio`
+- **Seed script**: Pobla la base de datos con datos de ejemplo usando `bun run db:seed`
+
+### Ejecutando los Tests
+
+Para ejecutar los tests unitarios, utiliza el siguiente comando:
+
+```bash
+bun run test
+```
+
+</div>
+
+### Ejemplo de Respuesta
+
+<div class="response-example" style="background-color: #282c34; color: #abb2bf; padding: 1rem; border-radius: 4px; margin-bottom: 1rem; font-family: 'Courier New', monospace;">
 
 ```bash
 curl http://localhost:3000/
 # Response: Hello Hono!
 ```
 
-## Database
+</div>
 
-The database schema is defined in `src/db/schema.ts` using Drizzle ORM.
+## 💾 Base de Datos
 
-### Schema
+<div class="database" style="background-color: #f8f9fa; padding: 1rem; border-radius: 8px;">
 
-The project includes two tables: `users` and `todos`.
+El esquema de la base de datos está definido en `src/db/schema.ts` usando Drizzle ORM.
 
-- **`users`**: Stores user information.
-- **`todos`**: Stores todo items, with a foreign key relationship to the `users` table.
+### Esquema
 
-### Migrations
+<div class="schema" style="background-color: #ffffff; padding: 1rem; border-radius: 8px; margin: 1rem 0; border: 1px solid #e0e0e0;">
 
-Database migrations are managed with `drizzle-kit`.
+El proyecto incluye dos tablas: `users` y `todos`.
 
-- **Generate a new migration:**
+<div class="table-card" style="background-color: #f0f8ff; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #4285f4;">
+  <h4>📋 Tabla: users</h4>
+  <p>Almacena información de usuarios.</p>
+  <ul>
+    <li><strong>id</strong>: UUID (clave primaria)</li>
+    <li><strong>email</strong>: VARCHAR(256) (único, no nulo)</li>
+    <li><strong>passwordHash</strong>: VARCHAR(500) (no nulo)</li>
+    <li><strong>age</strong>: INTEGER (con restricciones de 0-120)</li>
+    <li><strong>createdAt</strong>: TIMESTAMP</li>
+    <li><strong>updatedAt</strong>: TIMESTAMP</li>
+  </ul>
+</div>
 
-  ```bash
-  bun run db:generate:migration
-  ```
+<div class="table-card" style="background-color: #f0fff0; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #34a853;">
+  <h4>📝 Tabla: todos</h4>
+  <p>Almacena elementos de tareas, con una relación de clave foránea a la tabla <code>users</code>.</p>
+  <ul>
+    <li><strong>id</strong>: UUID (clave primaria)</li>
+    <li><strong>userId</strong>: UUID (clave foránea a users.id)</li>
+    <li><strong>title</strong>: VARCHAR(500) (no nulo)</li>
+    <li><strong>description</strong>: VARCHAR(1000)</li>
+    <li><strong>completed</strong>: BOOLEAN (no nulo, por defecto false)</li>
+    <li><strong>createdAt</strong>: TIMESTAMP</li>
+    <li><strong>updatedAt</strong>: TIMESTAMP</li>
+  </ul>
+</div>
 
-- **Apply migrations:**
+</div>
 
-  ```bash
-  bun run db:migrate
-  ```
+### Migraciones
 
-- **Drizzle Studio:**
+<div class="migrations" style="background-color: #ffffff; padding: 1rem; border-radius: 8px; margin: 1rem 0; border: 1px solid #e0e0e0;">
 
-  Open a web-based GUI for your database:
-  ```bash
-  bun run db:studio
-  ```
+Las migraciones de la base de datos se gestionan con `drizzle-kit`.
 
-## Tooling
+<div class="code-block" style="background-color: #282c34; color: #abb2bf; padding: 1rem; border-radius: 4px; margin-bottom: 1rem;">
 
-### Biome
+```bash
+# Generar una nueva migración
+bun run db:generate:migration
+```
 
-This project uses [Biome](https://biomejs.dev/) for code formatting and linting. The configuration is in `biome.jsonc`.
+</div>
 
-- **Format all files:**
-  ```bash
-  bun run format
-  ```
-- **Lint all files:**
-  ```bash
-  bun run lint
-  ```
-- **Check all files (format and lint):**
-  ```bash
-  bun run check
-  ```
+<div class="code-block" style="background-color: #282c34; color: #abb2bf; padding: 1rem; border-radius: 4px; margin-bottom: 1rem;">
 
-### Husky and lint-staged
+```bash
+# Aplicar migraciones
+bun run db:migrate
+```
 
-[Husky](https://typicode.github.io/husky/) is used to run scripts at different stages of the git process. A `pre-commit` hook is configured to run `lint-staged`, which in turn runs `bun format` and `bun lint` on staged files. This ensures that all committed code is formatted and linted correctly.
+</div>
 
-## Available Scripts
+<div class="code-block" style="background-color: #282c34; color: #abb2bf; padding: 1rem; border-radius: 4px; margin-bottom: 1rem;">
 
-| Script                    | Description                                             |
-| :------------------------ | :------------------------------------------------------ |
-| `bun run dev`             | Starts the development server with hot-reloading.       |
-| `bun run prepare`         | Installs Husky hooks.                                   |
-| `bun run format`          | Formats the code using Biome.                           |
-| `bun run lint`            | Lints the code using Biome.                             |
-| `bun run check`           | Runs both the linter and formatter.                     |
-| `bun run db:generate:migration` | Generates a new database migration file.                |
-| `bun run db:migrate`      | Applies all pending migrations to the database.         |
-| `bun run db:studio`       | Starts Drizzle Studio, a GUI for the database.          |
+```bash
+# Abrir Drizzle Studio (GUI web para tu base de datos)
+bun run db:studio
+```
 
-## Contributing
+</div>
 
-Contributions are welcome! Please follow these steps:
+</div>
 
-1.  Fork the project.
-2.  Create a new branch (`git checkout -b feature/AmazingFeature`).
-3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`).
-4.  Push to the branch (`git push origin feature/AmazingFeature`).
-5.  Open a Pull Request.
+</div>
 
-## License
+## 🛠️ Herramientas
 
-This project is licensed under the MIT License. See the `LICENSE` file for more details.
+<div class="tooling" style="background-color: #f8f9fa; padding: 1rem; border-radius: 8px;">
+
+### 🧹 Biome
+
+<div class="biome" style="background-color: #ffffff; padding: 1rem; border-radius: 8px; margin: 1rem 0; border: 1px solid #e0e0e0;">
+
+Este proyecto utiliza [Biome](https://biomejs.dev/) para el formateo y linting de código. La configuración se encuentra en `biome.jsonc`.
+
+<div class="code-block" style="background-color: #282c34; color: #abb2bf; padding: 1rem; border-radius: 4px; margin-bottom: 1rem;">
+
+```bash
+# Formatear código
+bun run format
+
+# Verificar linting
+bun run lint
+
+# Verificar tipos y linting
+bun run check
+```
+
+</div>
+
+</div>
+
+</div>
+
+<hr style="margin: 2rem 0;">
+
+<div class="footer" style="text-align: center; padding: 1rem; color: #666;">
+
+<p>Hecho con ❤️ usando <a href="https://hono.dev/" target="_blank">Hono</a> y <a href="https://orm.drizzle.team/" target="_blank">Drizzle ORM</a></p>
+
+<p>© 2023-2024 Hono-Drizzle Project</p>
+
+</div>
+
+## 📋 Comandos Disponibles
+
+<div class="commands" style="background-color: #f8f9fa; padding: 1rem; border-radius: 8px;">
+
+| Comando                   | Descripción                                            |
+| :------------------------ | :----------------------------------------------------- |
+| `bun run dev`             | Inicia el servidor de desarrollo con recarga en vivo   |
+| `bun run test`            | Ejecuta los tests unitarios                            |
+| `bun run prepare`         | Instala los hooks de Husky                             |
+| `bun run format`          | Formatea el código usando Biome                        |
+| `bun run lint`            | Verifica el código usando Biome                        |
+| `bun run check`           | Ejecuta tanto el linter como el formateador            |
+| `bun run db:generate:migration` | Genera un nuevo archivo de migración de base de datos |
+| `bun run db:migrate`      | Aplica todas las migraciones pendientes               |
+| `bun run db:studio`       | Inicia Drizzle Studio, una GUI para la base de datos   |
+| `bun run db:seed`         | Ejecuta el script de semillas para poblar la BD        |
+
+</div>
+
+## 🤝 Contribuir
+
+<div class="contributing" style="background-color: #f8f9fa; padding: 1rem; border-radius: 8px;">
+
+¡Las contribuciones son bienvenidas! Por favor, sigue estos pasos:
+
+1. Haz un fork del proyecto
+2. Crea una nueva rama (`git checkout -b feature/CaracteristicaIncreible`)
+3. Haz commit de tus cambios (`git commit -m 'Añadir CaracteristicaIncreible'`)
+4. Haz push a la rama (`git push origin feature/CaracteristicaIncreible`)
+5. Abre un Pull Request
+
+</div>
+
+## 📄 Licencia
+
+<div class="license" style="background-color: #f8f9fa; padding: 1rem; border-radius: 8px;">
+
+Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
+
+</div>

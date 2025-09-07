@@ -1,3 +1,5 @@
+/** biome-ignore-all lint/suspicious/noConsole: Console is used for debugging */
+/** biome-ignore-all lint/nursery/noUnnecessaryConditions: This is a test setup file */
 import { randomUUID } from 'node:crypto';
 import { join } from 'node:path';
 import { drizzle, type NodePgDatabase } from 'drizzle-orm/node-postgres';
@@ -42,16 +44,29 @@ export async function createTestDb(): Promise<TestDbContext> {
 }
 
 export async function destroyTestDb({ pool, testDbName }: TestDbContext) {
-  await pool.end();
-  const adminPool = new Pool({ connectionString: adminDbUrl });
-
   try {
-    await adminPool.query(
-      'SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = $1 AND pid <> pg_backend_pid()',
-      [testDbName]
-    );
-    await adminPool.query(`DROP DATABASE IF EXISTS ${testDbName}`);
-  } finally {
-    await adminPool.end();
+    // Primero cerramos el pool de conexiones
+    if (pool) {
+      await pool.end();
+    }
+
+    // Creamos una conexión administrativa para eliminar la base de datos
+    const adminPool = new Pool({ connectionString: adminDbUrl });
+
+    try {
+      // Terminamos todas las conexiones activas a la base de datos
+      await adminPool.query(
+        'SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = $1 AND pid <> pg_backend_pid()',
+        [testDbName]
+      );
+      // Eliminamos la base de datos
+      await adminPool.query(`DROP DATABASE IF EXISTS ${testDbName}`);
+    } catch (error) {
+      console.error(`Error al eliminar la base de datos ${testDbName}:`, error);
+    } finally {
+      await adminPool.end();
+    }
+  } catch (error) {
+    console.error('Error al destruir la base de datos de prueba:', error);
   }
 }
