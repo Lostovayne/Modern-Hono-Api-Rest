@@ -78,53 +78,6 @@
 
 </div>
 
-## 🛠️ Stack Tecnológico
-
-<div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; margin: 2rem 0;">
-
-<div style="text-align: center; width: 120px;">
-  <img src="https://raw.githubusercontent.com/honojs/hono/main/docs/images/hono-logo.png" alt="Hono" width="60" height="60" />
-  <p><a href="https://hono.dev/">Hono</a></p>
-  <small>Framework web ultrarrápido</small>
-</div>
-
-<div style="text-align: center; width: 120px;">
-  <img src="https://orm.drizzle.team/favicon.ico" alt="Drizzle ORM" width="60" height="60" />
-  <p><a href="https://orm.drizzle.team/">Drizzle ORM</a></p>
-  <small>ORM TypeScript nativo</small>
-</div>
-
-<div style="text-align: center; width: 120px;">
-  <img src="https://wiki.postgresql.org/images/3/30/PostgreSQL_logo.3colors.120x120.png" alt="PostgreSQL" width="60" height="60" />
-  <p><a href="https://www.postgresql.org/">PostgreSQL</a></p>
-  <small>Base de datos relacional</small>
-</div>
-
-<div style="text-align: center; width: 120px;">
-  <img src="https://bun.sh/logo.svg" alt="Bun" width="60" height="60" />
-  <p><a href="https://bun.sh/">Bun</a></p>
-  <small>Runtime JavaScript todo-en-uno</small>
-</div>
-
-<div style="text-align: center; width: 120px;">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg" alt="TypeScript" width="60" height="60" />
-  <p><a href="https://www.typescriptlang.org/">TypeScript</a></p>
-  <small>JavaScript con tipos</small>
-</div>
-
-<div style="text-align: center; width: 120px;">
-  <img src="https://www.docker.com/wp-content/uploads/2022/03/vertical-logo-monochromatic.png" alt="Docker" width="60" height="60" />
-  <p><a href="https://www.docker.com/">Docker</a></p>
-  <small>Contenerización</small>
-</div>
-
-<div style="text-align: center; width: 120px;">
-  <img src="https://biomejs.dev/img/favicon.svg" alt="Biome" width="60" height="60" />
-  <p><a href="https://biomejs.dev/">Biome</a></p>
-  <small>Linter y formateador</small>
-</div>
-
-</div>
 
 ## 📁 Estructura del Proyecto
 
